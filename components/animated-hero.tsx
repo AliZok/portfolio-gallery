@@ -46,8 +46,11 @@ const slogans = [
 export function AnimatedHero() {
   const [currentSloganIndex, setCurrentSloganIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
+  const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
+    if (isHovering) return
+
     const interval = setInterval(() => {
       setIsVisible(false)
       setTimeout(() => {
@@ -57,7 +60,7 @@ export function AnimatedHero() {
     }, 4000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [isHovering])
 
   const currentSlogan = slogans[currentSloganIndex]
   const IconComponent = currentSlogan.icon
@@ -84,7 +87,11 @@ export function AnimatedHero() {
 
             {/* Animated Slogan Section */}
             <div className="space-y-6">
-              <div className="h-32 flex items-center">
+              <div 
+                className="h-32 flex items-center"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
                 <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className={`p-3 rounded-xl bg-yellow-500/20 backdrop-blur-sm ${currentSlogan.color}`}>

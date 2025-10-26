@@ -193,7 +193,7 @@ export function ProjectCarousel() {
               {currentProject.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 font-mono text-xs text-blue-400 backdrop-blur-sm"
+                  className="rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 font-mono text-xs text-yellow-400 backdrop-blur-sm"
                 >
                   {tag}
                 </span>
@@ -213,7 +213,7 @@ export function ProjectCarousel() {
               <Button
                 asChild
                 size="lg"
-                className="group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 font-sans text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="group bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 font-sans text-sm font-semibold text-black shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 <a
                   href={currentProject.link}
@@ -239,7 +239,7 @@ export function ProjectCarousel() {
                 onClick={() => goToSlide(index)}
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300",
-                  index === currentIndex ? "w-8 bg-gradient-to-r from-blue-400 to-purple-400" : "w-4 bg-white/30 hover:bg-white/50",
+                  index === currentIndex ? "w-8 bg-gradient-to-r from-yellow-400 to-yellow-600" : "w-4 bg-white/30 hover:bg-white/50",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
               />
