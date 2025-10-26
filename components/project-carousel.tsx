@@ -19,35 +19,35 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A modern e-commerce solution with seamless checkout experience",
-    image: "/modern-ecommerce-interface.png",
+    title: "Personal Branding",
+    description: "Professional brand identity design with modern aesthetics",
+    image: "/personal-branding.PNG",
     link: "https://example.com/project1",
-    tags: ["Next.js", "TypeScript", "Stripe"],
+    tags: ["Branding", "Design", "Identity"],
   },
   {
     id: 2,
-    title: "Portfolio Dashboard",
-    description: "Real-time analytics dashboard for portfolio management",
-    image: "/analytics-dashboard-dark-theme.png",
+    title: "Carousel Gallery",
+    description: "Dynamic image gallery with smooth carousel transitions",
+    image: "/carousel.PNG",
     link: "https://example.com/project2",
-    tags: ["React", "D3.js", "TailwindCSS"],
+    tags: ["UI/UX", "React", "Design"],
   },
   {
     id: 3,
-    title: "Social Media App",
-    description: "Connect and share moments with friends and family",
-    image: "/social-media-app-interface.png",
+    title: "Cars Gallery",
+    description: "Showcase automotive photography and elegant presentation",
+    image: "/cars-gallery.PNG",
     link: "https://example.com/project3",
-    tags: ["Next.js", "Supabase", "Framer Motion"],
+    tags: ["Photography", "Gallery", "Design"],
   },
   {
     id: 4,
-    title: "Task Management Tool",
-    description: "Streamline your workflow with intuitive task organization",
-    image: "/task-management-kanban.png",
+    title: "Woman Salon",
+    description: "Beautiful salon interface with elegant design elements",
+    image: "/woman-salon.PNG",
     link: "https://example.com/project4",
-    tags: ["React", "Node.js", "MongoDB"],
+    tags: ["UI/UX", "Web Design", "Beauty"],
   },
 ]
 
@@ -64,7 +64,7 @@ export function ProjectCarousel() {
     const interval = setInterval(() => {
       setSlideDirection("right")
       setCurrentIndex((prev) => (prev + 1) % projects.length)
-    }, 5000)
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [isAutoPlaying])
@@ -148,7 +148,7 @@ export function ProjectCarousel() {
 
   return (
     <div
-      className="relative h-screen w-full overflow-hidden bg-background"
+      className="relative h-[600px] w-full overflow-hidden bg-background rounded-2xl shadow-2xl"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -183,27 +183,27 @@ export function ProjectCarousel() {
       {/* Content Overlay */}
       <div className="relative z-10 flex h-full flex-col">
         {/* Header */}
-        <header className="flex items-center justify-between p-6 md:p-8">
+        <header className="flex items-center justify-between p-6">
           <div>
-            <h1 className="font-sans text-2xl font-bold tracking-tight text-white md:text-3xl">Portfolio</h1>
-            <p className="mt-1 font-sans text-sm text-white/70">Frontend Developer</p>
+            <h1 className="font-sans text-xl font-bold tracking-tight text-white">Featured Work</h1>
+            <p className="mt-1 font-sans text-sm text-white/70">Portfolio Projects</p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-mono text-sm text-accent">{String(currentIndex + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-sm text-blue-400">{String(currentIndex + 1).padStart(2, "0")}</span>
             <span className="text-white/50">/</span>
             <span className="font-mono text-sm text-white/50">{String(projects.length).padStart(2, "0")}</span>
           </div>
         </header>
 
         {/* Main Content */}
-        <div className="flex flex-1 flex-col justify-end p-6 md:p-12 lg:p-16">
-          <div className="max-w-3xl space-y-6">
+        <div className="flex flex-1 flex-col justify-end p-6">
+          <div className="max-w-2xl space-y-4">
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {currentProject.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-xs text-accent backdrop-blur-sm"
+                  className="rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 font-mono text-xs text-blue-400 backdrop-blur-sm"
                 >
                   {tag}
                 </span>
@@ -211,19 +211,19 @@ export function ProjectCarousel() {
             </div>
 
             {/* Title */}
-            <h2 className="font-sans text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
+            <h2 className="font-sans text-3xl font-bold leading-tight text-white md:text-4xl">
               {currentProject.title}
             </h2>
 
             {/* Description */}
-            <p className="font-sans text-lg leading-relaxed text-white/80 md:text-xl">{currentProject.description}</p>
+            <p className="font-sans text-base leading-relaxed text-white/80 md:text-lg">{currentProject.description}</p>
 
             {/* CTA Button */}
-            <div className="pt-4">
+            <div className="pt-2">
               <Button
                 asChild
                 size="lg"
-                className="group bg-accent font-sans text-base font-semibold text-black hover:bg-accent/90"
+                className="group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 font-sans text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 <a
                   href={currentProject.link}
@@ -240,7 +240,7 @@ export function ProjectCarousel() {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex items-center justify-between p-6 md:p-8">
+        <div className="flex items-center justify-between p-6">
           {/* Dots Navigation */}
           <div className="flex gap-2">
             {projects.map((_, index) => (
@@ -249,7 +249,7 @@ export function ProjectCarousel() {
                 onClick={() => goToSlide(index)}
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300",
-                  index === currentIndex ? "w-12 bg-accent" : "w-8 bg-white/30 hover:bg-white/50",
+                  index === currentIndex ? "w-8 bg-gradient-to-r from-blue-400 to-purple-400" : "w-4 bg-white/30 hover:bg-white/50",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -257,23 +257,23 @@ export function ProjectCarousel() {
           </div>
 
           {/* Arrow Navigation */}
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <Button
               variant="ghost"
               size="icon"
               onClick={goToPrevious}
-              className="h-16 w-16 rounded-xl border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white"
+              className="h-12 w-12 rounded-xl border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white transition-all duration-300"
             >
-              <ChevronLeft className="h-7 w-7" />
+              <ChevronLeft className="h-5 w-5" />
               <span className="sr-only">Previous project</span>
             </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={goToNext}
-              className="h-16 w-16 rounded-xl border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white"
+              className="h-12 w-12 rounded-xl border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:text-white transition-all duration-300"
             >
-              <ChevronRight className="h-7 w-7" />
+              <ChevronRight className="h-5 w-5" />
               <span className="sr-only">Next project</span>
             </Button>
           </div>
