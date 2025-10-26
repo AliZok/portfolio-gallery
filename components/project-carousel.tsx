@@ -176,9 +176,13 @@ export function ProjectCarousel({ currentIndex: externalIndex, onIndexChange }: 
 
 
         {/* Main Content */}
-        <div className="flex flex-1 flex-col justify-end p-6">
+        <div className="flex flex-1 flex-col justify-end p-6 pb-0">
           <div className="max-w-2xl space-y-4">
-            {/* Tags */}
+
+            <h2 className="font-sans text-3xl font-bold leading-tight text-white md:text-4xl">
+              {currentProject.title}
+            </h2>
+
             <div className="flex flex-wrap gap-2">
               {currentProject.tags.map((tag) => (
                 <span
@@ -190,13 +194,8 @@ export function ProjectCarousel({ currentIndex: externalIndex, onIndexChange }: 
               ))}
             </div>
 
-            {/* Title */}
-            <h2 className="font-sans text-3xl font-bold leading-tight text-white md:text-4xl">
-              {currentProject.title}
-            </h2>
-
             {/* Description */}
-            <p className="font-sans text-base leading-relaxed text-white/80 md:text-lg">{currentProject.description}</p>
+            {/* <p className="font-sans text-base leading-relaxed text-white/80 md:text-lg">{currentProject.description}</p> */}
 
             {/* CTA Button */}
             <div className="pt-2">
