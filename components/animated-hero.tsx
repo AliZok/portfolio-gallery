@@ -3,48 +3,49 @@
 import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ProjectCarousel } from "@/components/project-carousel"
-import { ArrowRight, Code, Palette, Zap, Globe, Smartphone } from "lucide-react"
+import { ArrowRight, Sparkles, Layout, Grid, Scissors } from "lucide-react"
 
-const slogans = [
+interface ProjectInfo {
+  title: string
+  subtitle: string
+  description: string
+  icon: typeof Sparkles
+  color: string
+}
+
+const projectInfos: ProjectInfo[] = [
   {
-    title: "Frontend Development",
-    subtitle: "Crafting Digital Experiences",
-    description: "Building responsive, interactive web applications that engage users and drive business growth.",
-    icon: Code,
+    title: "Personal Branding",
+    subtitle: "Brand Identity Design",
+    description: "Creating professional brand identities with modern aesthetics that represent your unique vision.",
+    icon: Sparkles,
     color: "text-yellow-500"
   },
   {
-    title: "Modern Web Design",
-    subtitle: "Beautiful & Functional",
-    description: "Creating stunning visual designs that combine aesthetics with seamless user experience.",
-    icon: Palette,
+    title: "Carousel Gallery",
+    subtitle: "Dynamic UI Components",
+    description: "Building interactive image galleries with smooth carousel transitions and elegant animations.",
+    icon: Grid,
     color: "text-yellow-500"
   },
   {
-    title: "Performance Optimization",
-    subtitle: "Lightning Fast",
-    description: "Optimizing applications for speed and efficiency to deliver exceptional user experiences.",
-    icon: Zap,
+    title: "Cars Gallery",
+    subtitle: "Photography Showcase",
+    description: "Showcasing automotive photography with elegant presentation and attention to detail.",
+    icon: Layout,
     color: "text-yellow-500"
   },
   {
-    title: "Responsive Design",
-    subtitle: "Perfect on Every Device",
-    description: "Ensuring your web applications look and work perfectly across all devices and screen sizes.",
-    icon: Smartphone,
+    title: "Woman Salon",
+    subtitle: "Elegant Interfaces",
+    description: "Designing beautiful salon interfaces with elegant design elements and perfect user experience.",
+    icon: Scissors,
     color: "text-yellow-500"
   },
-  {
-    title: "Web Innovation",
-    subtitle: "Cutting-Edge Solutions",
-    description: "Leveraging the latest technologies to build innovative web solutions for tomorrow's challenges.",
-    icon: Globe,
-    color: "text-yellow-500"
-  }
 ]
 
 export function AnimatedHero() {
-  const [currentSloganIndex, setCurrentSloganIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
   const [isHovering, setIsHovering] = useState(false)
 
@@ -54,16 +55,24 @@ export function AnimatedHero() {
     const interval = setInterval(() => {
       setIsVisible(false)
       setTimeout(() => {
-        setCurrentSloganIndex((prev) => (prev + 1) % slogans.length)
+        setCurrentIndex((prev) => (prev + 1) % projectInfos.length)
         setIsVisible(true)
       }, 300)
-    }, 4000)
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [isHovering])
 
-  const currentSlogan = slogans[currentSloganIndex]
-  const IconComponent = currentSlogan.icon
+  const handleIndexChange = (index: number) => {
+    setIsVisible(false)
+    setTimeout(() => {
+      setCurrentIndex(index)
+      setIsVisible(true)
+    }, 300)
+  }
+
+  const currentInfo = projectInfos[currentIndex]
+  const IconComponent = currentInfo.icon
 
   return (
     <div className="min-h-screen bg-black">
@@ -94,31 +103,31 @@ export function AnimatedHero() {
               >
                 <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-3 rounded-xl bg-yellow-500/20 backdrop-blur-sm ${currentSlogan.color}`}>
+                    <div className={`p-3 rounded-xl bg-yellow-500/20 backdrop-blur-sm ${currentInfo.color}`}>
                       <IconComponent className="h-8 w-8" />
                     </div>
                     <div>
                       <h2 className="text-3xl font-bold text-white">
-                        {currentSlogan.title}
+                        {currentInfo.title}
                       </h2>
-                      <p className={`text-lg font-medium ${currentSlogan.color}`}>
-                        {currentSlogan.subtitle}
+                      <p className={`text-lg font-medium ${currentInfo.color}`}>
+                        {currentInfo.subtitle}
                       </p>
                     </div>
                   </div>
                   <p className="text-gray-300 text-lg leading-relaxed max-w-lg">
-                    {currentSlogan.description}
+                    {currentInfo.description}
                   </p>
                 </div>
               </div>
 
               {/* Progress Indicator */}
               <div className="flex gap-2">
-                {slogans.map((_, index) => (
+                {projectInfos.map((_, index) => (
                   <div
                     key={index}
                     className={`h-1 rounded-full transition-all duration-300 ${
-                      index === currentSloganIndex 
+                      index === currentIndex 
                         ? 'w-8 bg-gradient-to-r from-yellow-400 to-yellow-600' 
                         : 'w-4 bg-white/30'
                     }`}
@@ -149,7 +158,10 @@ export function AnimatedHero() {
 
           {/* Right Side - Project Carousel */}
           <div className="relative">
-            <ProjectCarousel />
+            <ProjectCarousel 
+              currentIndex={currentIndex}
+              onIndexChange={handleIndexChange}
+            />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -51,23 +51,31 @@ const projects: Project[] = [
   },
 ]
 
-export function ProjectCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+interface ProjectCarouselProps {
+  currentIndex: number
+  onIndexChange: (index: number) => void
+}
+
+export function ProjectCarousel({ currentIndex: externalIndex, onIndexChange }: ProjectCarouselProps) {
   const [slideDirection, setSlideDirection] = useState<"left" | "right">("right")
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
+  const currentIndex = externalIndex
 
-  useEffect(() => {
-    if (!isAutoPlaying) return
+  const goToNext = useCallback(() => {
+    setSlideDirection("right")
+    onIndexChange((currentIndex + 1) % projects.length)
+  }, [currentIndex, onIndexChange])
 
-    const interval = setInterval(() => {
-      setSlideDirection("right")
-      setCurrentIndex((prev) => (prev + 1) % projects.length)
-    }, 2000)
+  const goToPrevious = useCallback(() => {
+    setSlideDirection("left")
+    onIndexChange((currentIndex - 1 + projects.length) % projects.length)
+  }, [currentIndex, onIndexChange])
 
-    return () => clearInterval(interval)
-  }, [isAutoPlaying])
+  const goToSlide = useCallback((index: number) => {
+    setSlideDirection(index > currentIndex ? "right" : "left")
+    onIndexChange(index)
+  }, [currentIndex, onIndexChange])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -80,25 +88,7 @@ export function ProjectCarousel() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [])
-
-  const goToNext = () => {
-    setIsAutoPlaying(false)
-    setSlideDirection("right")
-    setCurrentIndex((prev) => (prev + 1) % projects.length)
-  }
-
-  const goToPrevious = () => {
-    setIsAutoPlaying(false)
-    setSlideDirection("left")
-    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
-  }
-
-  const goToSlide = (index: number) => {
-    setIsAutoPlaying(false)
-    setSlideDirection(index > currentIndex ? "right" : "left")
-    setCurrentIndex(index)
-  }
+  }, [goToNext, goToPrevious])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
