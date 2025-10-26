@@ -138,21 +138,6 @@ export function AnimatedHero() {
               </Button>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">50+</div>
-                <div className="text-sm text-gray-400">Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">3+</div>
-                <div className="text-sm text-gray-400">Years</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">100%</div>
-                <div className="text-sm text-gray-400">Satisfaction</div>
-              </div>
-            </div>
           </div>
 
           {/* Right Side - Project Carousel */}

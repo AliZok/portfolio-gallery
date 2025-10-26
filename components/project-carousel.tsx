@@ -183,17 +183,7 @@ export function ProjectCarousel() {
       {/* Content Overlay */}
       <div className="relative z-10 flex h-full flex-col">
         {/* Header */}
-        <header className="flex items-center justify-between p-6">
-          <div>
-            <h1 className="font-sans text-xl font-bold tracking-tight text-white">Featured Work</h1>
-            <p className="mt-1 font-sans text-sm text-white/70">Portfolio Projects</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-sm text-blue-400">{String(currentIndex + 1).padStart(2, "0")}</span>
-            <span className="text-white/50">/</span>
-            <span className="font-mono text-sm text-white/50">{String(projects.length).padStart(2, "0")}</span>
-          </div>
-        </header>
+
 
         {/* Main Content */}
         <div className="flex flex-1 flex-col justify-end p-6">
