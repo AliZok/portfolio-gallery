@@ -83,11 +83,13 @@ export function AnimatedHero() {
             {/* Main Title */}
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
-                <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                  Frontend
-                </span>
-                <br />
-                <span className="text-white">Developer</span>
+                <div className="text-white">
+                  ALI ZOKAEI
+                </div>
+             
+                <div className="text-xs lg:text-sm text-gray-400 font-normal">as</div>
+
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Developer</div>
               </h1>
               <p className="text-xl text-gray-300 max-w-md">
                 Transforming ideas into exceptional digital experiences
