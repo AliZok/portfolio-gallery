@@ -58,7 +58,7 @@ export function AnimatedHero() {
         setCurrentIndex((prev) => (prev + 1) % projectInfos.length)
         setIsVisible(true)
       }, 300)
-    }, 2000)
+    }, 6000)
 
     return () => clearInterval(interval)
   }, [isHovering])
